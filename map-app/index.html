@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>本地测试地图 — 测站采集演练场</title>
+  <link rel="stylesheet" href="/vendor/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="/vendor/markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="/vendor/markercluster/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="map" role="application" aria-label="测站地图"></div>
+
+  <!-- 所有信息都以可见 DOM 呈现，机器人与人类看到的内容完全一致 -->
+  <div id="hud" data-testid="hud">
+    <div>缩放级别：<span id="hud-zoom" data-testid="hud-zoom">-</span></div>
+    <div>中心经度：<span id="hud-lng" data-testid="hud-lng">-</span></div>
+    <div>中心纬度：<span id="hud-lat" data-testid="hud-lat">-</span></div>
+    <div>数据状态：<span id="hud-loading" data-testid="hud-loading">空闲</span></div>
+    <div>可见标记：<span id="hud-markers" data-testid="hud-markers">0</span></div>
+    <div>可见聚合：<span id="hud-clusters" data-testid="hud-clusters">0</span></div>
+  </div>
+
+  <div id="legend" data-testid="legend">
+    <strong>图例</strong>
+    <div><span class="dot station-dot"></span> 单个测站（点击查看详情）</div>
+    <div><span class="dot cluster-dot"></span> 聚合（继续放大/点击展开）</div>
+    <div><span class="dot stuck-dot"></span> 无法展开的聚合（重合测站）</div>
+    <div class="hint">提示：方向键平移，+/- 缩放。数据移动后有加载延迟。</div>
+  </div>
+
+  <div id="crosshair" data-testid="crosshair"></div>
+
+  <!-- 移动后的数据加载遮罩（可见的加载反馈，不参与地图投影） -->
+  <div id="loading-veil" data-testid="loading-veil" class="veil-hidden">
+    <div class="veil-card">数据加载中…</div>
+  </div>
+
+  <script src="/vendor/leaflet/dist/leaflet.js"></script>
+  <script src="/vendor/markercluster/dist/leaflet.markercluster.js"></script>
+  <script src="./generated/stations.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

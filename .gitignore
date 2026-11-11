@@ -1,0 +1,7 @@
+node_modules/
+output/
+data/ground-truth.json
+map-app/generated/
+test-results/
+playwright-report/
+.DS_Store

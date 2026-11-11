@@ -1,0 +1,25 @@
+{
+  "name": "map-station-crawler",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright 地图测站采集机器人 + 本地测试地图（仅可见交互，禁止隐藏接口）",
+  "type": "module",
+  "scripts": {
+    "postinstall": "node scripts/generate-data.mjs",
+    "generate": "node scripts/generate-data.mjs",
+    "serve": "node scripts/serve.mjs",
+    "crawl": "tsx src/crawler/cli.ts",
+    "test": "playwright test",
+    "report": "tsx src/crawler/cli.ts --report-only"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3"
+  }
+}
