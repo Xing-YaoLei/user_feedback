@@ -1,0 +1,8 @@
+# 本地运行依赖（无任何云端 OCR / 网络服务）
+opencv-python-headless>=4.10
+pytesseract>=0.3.10
+Pillow>=10.0
+numpy>=1.26
+flask>=3.0
+pytest>=8.0
+# 系统需本地安装 tesseract 可执行程序，OCR 语言模型随项目放在 ./tessdata

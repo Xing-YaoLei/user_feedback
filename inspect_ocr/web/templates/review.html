@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>字段校正 - {{ page.page_id[:8] }}</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif;
+         background: #f4f5f7; color: #1f2933; font-size: 14px; }
+  header { background: #1f3a5f; color: #fff; padding: 12px 24px; display: flex;
+           align-items: center; gap: 18px; }
+  header a { color: #bcd4f5; text-decoration: none; font-size: 13px; }
+  .layout { display: flex; height: calc(100vh - 52px); }
+  .canvas-wrap { flex: 1; overflow: auto; padding: 18px; background: #e6e9ee;
+                 display: flex; justify-content: center; }
+  #stage { position: relative; box-shadow: 0 2px 14px rgba(0,0,0,.25); background: #fff; }
+  #srcImg { display: block; max-width: 100%; }
+  .overlay { position: absolute; inset: 0; cursor: crosshair; }
+  .side { width: 430px; background: #fff; border-left: 1px solid #dde2e8;
+          overflow-y: auto; padding: 16px 18px; }
+  .field-card { border: 1px solid #e2e7ed; border-radius: 8px; padding: 11px 13px;
+                margin-bottom: 10px; cursor: pointer; transition: border-color .15s; }
+  .field-card:hover { border-color: #1f6feb; }
+  .field-card.active { border-color: #1f6feb; box-shadow: 0 0 0 2px rgba(31,111,235,.18); }
+  .field-card.needs_review { border-left: 4px solid #c0392b; }
+  .field-card.confirmed { border-left: 4px solid #1e7e46; }
+  .field-card.blank { border-left: 4px solid #8a96a3; }
+  .fc-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .fc-label { font-weight: 600; }
+  .fc-status { font-size: 11px; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+  .s-needs_review { background: #fdecec; color: #c0392b; }
+  .s-confirmed { background: #e8f6ee; color: #1e7e46; }
+  .s-auto { background: #eef2f7; color: #475569; }
+  .s-blank { background: #f0f1f3; color: #6b7684; }
+  .fc-value { margin-top: 6px; font-size: 13px; color: #334155; word-break: break-all; }
+  .fc-reason { margin-top: 5px; font-size: 12px; color: #c0392b; }
+  .fc-meta { margin-top: 5px; font-size: 11px; color: #8a96a3; }
+  .editor { border-top: 2px solid #1f3a5f; margin-top: 14px; padding-top: 14px; }
+  .editor label { display: block; font-weight: 600; margin: 10px 0 4px; }
+  .editor input, .editor textarea { width: 100%; padding: 8px 10px;
+        border: 1px solid #cbd3dc; border-radius: 6px; font-size: 14px; font-family: inherit; }
+  .btn { display: inline-block; border: none; border-radius: 6px; padding: 8px 14px;
+         font-size: 13px; font-weight: 600; cursor: pointer; margin: 8px 6px 0 0; }
+  .btn-primary { background: #1f6feb; color: #fff; }
+  .btn-ok { background: #1e7e46; color: #fff; }
+  .btn-warn { background: #b06a00; color: #fff; }
+  .btn-ghost { background: #eef2f7; color: #334155; }
+  .reasons { font-size: 12px; color: #c0392b; margin: 4px 0; }
+  details { margin-top: 16px; }
+  summary { cursor: pointer; font-weight: 600; }
+  .rev-item { font-size: 12px; background: #f8fafc; border: 1px solid #e2e7ed;
+              border-radius: 6px; padding: 8px 10px; margin-top: 8px; }
+  .rev-item code { background: #eef2f7; padding: 1px 5px; border-radius: 4px; }
+  .hint { font-size: 12px; color: #6b7684; background: #f0f6ff; border: 1px solid #cfe0fb;
+          padding: 8px 10px; border-radius: 6px; margin-bottom: 12px; }
+  .coord-mode { background: #fff4e0; border-color: #f0d49a; }
+</style>
+</head>
+<body>
+<header>
+  <a href="/">← 返回列表</a>
+  <strong>字段校正</strong>
+  <span style="opacity:.8;font-size:13px">页面 <code>{{ page.page_id[:8] }}</code> ·
+    版式 {{ page.template_name or "未识别" }} · 旋转 {{ page.rotate_angle }}°</span>
+  <span style="flex:1"></span>
+  <button class="btn btn-warn" id="btnReprocess">重新识别（保留人工值）</button>
+</header>
+
+<div class="layout">
+  <div class="canvas-wrap">
+    <div id="stage">
+      <img id="srcImg" src="/api/pages/{{ page.page_id }}/image" alt="原始扫描图">
+      <canvas class="overlay" id="overlay"></canvas>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="hint" id="modeHint">
+      点击左侧字段卡片或图上框选区域进行核对。修改值后点「保存修改」。
+    </div>
+    <div id="fieldList"></div>
+
+    <div class="editor" id="editor" style="display:none">
+      <input type="hidden" id="edKey">
+      <label>字段</label>
+      <div id="edLabel" style="font-weight:600"></div>
+      <label id="valueLabel">识别值（空白表示原图未填写，不会自动写 0）</label>
+      <textarea id="edValue" rows="2"></textarea>
+      <div class="reasons" id="edReasons"></div>
+      <div class="fc-meta" id="edMeta"></div>
+      <label>备注（修改原因，记入历史）</label>
+      <input id="edNote" placeholder="例如：原图编号为 EQ-100237，OCR 误识别">
+      <div>
+        <button class="btn btn-primary" id="btnSave">保存修改</button>
+        <button class="btn btn-ok" id="btnConfirm">确认当前值</button>
+        <button class="btn btn-ghost" id="btnCoord">更新来源坐标</button>
+        <button class="btn btn-ghost" id="btnCancelCoord" style="display:none">取消选点</button>
+      </div>
+      <div class="hint coord-mode" id="coordHint" style="display:none;margin-top:10px">
+        坐标模式：在原图上依次点击 <b>4 个点</b>（左上→右上→右下→左下）框出字段区域，
+        完成后自动保存。
+      </div>
+    </div>
+
+    <details>
+      <summary>修改历史（<span id="revCount">0</span>）</summary>
+      <div id="revList"></div>
+    </details>
+  </div>
+</div>
+
+<script>
+const PAGE_ID = {{ page.page_id | tojson }};
+let pageData = null;
+let activeKey = null;
+let coordMode = false;
+let coordPicks = [];
+
+const $ = (id) => document.getElementById(id);
+const statusText = {auto: "自动识别", needs_review: "待人工确认",
+                    confirmed: "已确认", blank: "源图空白"};
+const reasonText = {
+  low_confidence: "置信度偏低", id_format_error: "编号/日期格式错误",
+  unit_conflict: "数值单位冲突", blank_field: "源图该字段为空",
+  no_ocr_result: "未识别到文本",
+};
+
+async function loadPage() {
+  const r = await fetch(`/api/pages/${PAGE_ID}`);
+  pageData = await r.json();
+  renderFields();
+  renderRevisions();
+  drawOverlay();
+}
+
+function renderFields() {
+  const list = $("fieldList");
+  list.innerHTML = "";
+  Object.entries(pageData.fields).forEach(([key, f]) => {
+    const card = document.createElement("div");
+    card.className = `field-card ${f.status} ${key === activeKey ? "active" : ""}`;
+    const val = f.value === null || f.value === undefined
+      ? '<span style="color:#8a96a3">（空）</span>'
+      : Array.isArray(f.value) ? f.value.join("、") : String(f.value);
+    const reasons = (f.review_reasons || [])
+      .map(r => `<div>⚠ ${reasonText[r] || r}</div>`).join("");
+    card.innerHTML = `
+      <div class="fc-head">
+        <span class="fc-label">${f.label}</span>
+        <span class="fc-status s-${f.status}">${statusText[f.status] || f.status}</span>
+      </div>
+      <div class="fc-value">${val}</div>
+      ${reasons ? `<div class="fc-reason">${reasons}</div>` : ""}
+      <div class="fc-meta">置信度 ${f.confidence ?? "-"} ·
+        ${f.manual ? "含人工修改 · " : ""}原始 OCR: ${f.raw_text || "—"}</div>`;
+    card.onclick = () => openEditor(key);
+    list.appendChild(card);
+  });
+}
+
+function openEditor(key) {
+  activeKey = key;
+  const f = pageData.fields[key];
+  $("editor").style.display = "block";
+  $("edKey").value = key;
+  $("edLabel").textContent = `${f.label}（${key}）`;
+  $("edValue").value = Array.isArray(f.value)
+    ? (f.value || []).join("、")
+    : (f.value ?? "");
+  $("edReasons").innerHTML = (f.review_reasons || [])
+    .map(r => `⚠ ${reasonText[r] || r}`).join("　");
+  $("edMeta").textContent =
+    `类型: ${f.ftype}｜置信度: ${f.confidence ?? "-"}｜规定单位: ${f.unit || "-"}` +
+    `｜检测单位: ${f.detected_unit || "-"}`;
+  $("edNote").value = "";
+  renderFields();
+  drawOverlay();
+}
+
+async function saveField(extra) {
+  const key = $("edKey").value;
+  const f = pageData.fields[key];
+  let value = $("edValue").value.trim();
+  if (f.ftype === "number") {
+    if (value === "") value = null;
+    else { value = Number(value); if (Number.isNaN(value)) { alert("数值字段请输入数字"); return; } }
+  } else if (f.ftype === "checkbox_group") {
+    value = value === "" ? [] : value.split(/[、,，]/).map(s => s.trim()).filter(Boolean);
+  } else if (value === "") {
+    value = null;
+  }
+  const body = {value, note: $("edNote").value, ...extra};
+  const r = await fetch(`/api/pages/${PAGE_ID}/fields/${key}`, {
+    method: "PUT", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) { alert("保存失败"); return; }
+  await loadPage();
+  openEditor(key);
+}
+
+$("btnSave").onclick = () => saveField({});
+$("btnConfirm").onclick = async () => {
+  const key = $("edKey").value;
+  await fetch(`/api/pages/${PAGE_ID}/fields/${key}/confirm`, {method: "POST"});
+  await loadPage(); openEditor(key);
+};
+$("btnReprocess").onclick = async () => {
+  if (!confirm("重新识别整页？人工确认/修改过的字段将被保留。")) return;
+  const r = await fetch(`/api/pages/${PAGE_ID}/reprocess`, {method: "POST"});
+  const data = await r.json();
+  alert(`重识别完成，保留人工字段: ${data.preserved_manual_fields.join("、") || "无"}`);
+  activeKey = null; $("editor").style.display = "none";
+  await loadPage();
+};
+
+// ---------- 来源坐标更新 ----------
+$("btnCoord").onclick = () => {
+  coordMode = true; coordPicks = [];
+  $("coordHint").style.display = "block";
+  $("btnCancelCoord").style.display = "inline-block";
+  $("modeHint").textContent = "坐标选点模式：在图上点击 4 个点……";
+};
+$("btnCancelCoord").onclick = () => {
+  coordMode = false; coordPicks = [];
+  $("coordHint").style.display = "none";
+  $("btnCancelCoord").style.display = "none";
+  drawOverlay();
+};
+
+function imgScale() {
+  const img = $("srcImg");
+  return {sx: img.clientWidth / img.naturalWidth,
+          sy: img.clientHeight / img.naturalHeight};
+}
+
+$("overlay").addEventListener("click", (e) => {
+  if (!coordMode) return;
+  const rect = e.target.getBoundingClientRect();
+  const {sx, sy} = imgScale();
+  const x = (e.clientX - rect.left) / sx;
+  const y = (e.clientY - rect.top) / sy;
+  coordPicks.push([Math.round(x * 10) / 10, Math.round(y * 10) / 10]);
+  drawOverlay();
+  if (coordPicks.length === 4) {
+    coordMode = false;
+    $("coordHint").style.display = "none";
+    $("btnCancelCoord").style.display = "none";
+    saveField({source_polygon: coordPicks});
+    coordPicks = [];
+  }
+});
+
+// ---------- 画布叠加 ----------
+function drawOverlay() {
+  const img = $("srcImg");
+  const cv = $("overlay");
+  cv.width = img.clientWidth; cv.height = img.clientHeight;
+  const ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  if (!pageData) return;
+  const {sx, sy} = imgScale();
+  Object.entries(pageData.fields).forEach(([key, f]) => {
+    const poly = f.source_polygon;
+    if (!poly || poly.length < 3) return;
+    ctx.beginPath();
+    poly.forEach(([x, y], i) => {
+      const px = x * sx, py = y * sy;
+      i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    });
+    ctx.closePath();
+    const color = key === activeKey ? "#1f6feb"
+      : f.status === "needs_review" ? "#c0392b"
+      : f.status === "confirmed" ? "#1e7e46" : "#7a8aa0";
+    ctx.strokeStyle = color; ctx.lineWidth = key === activeKey ? 3 : 1.6;
+    ctx.fillStyle = color + "22";
+    ctx.fill(); ctx.stroke();
+    const cx = poly.reduce((s, p) => s + p[0], 0) / poly.length * sx;
+    const cy = poly[0][1] * sy - 6;
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = color;
+    ctx.fillText(f.label, Math.max(4, cx), Math.max(14, cy));
+  });
+  if (coordMode && coordPicks.length) {
+    const {sx, sy} = imgScale();
+    ctx.fillStyle = "#b06a00";
+    coordPicks.forEach(([x, y]) => {
+      ctx.beginPath(); ctx.arc(x * sx, y * sy, 5, 0, Math.PI * 2); ctx.fill();
+    });
+  }
+}
+window.addEventListener("resize", drawOverlay);
+$("srcImg").addEventListener("load", drawOverlay);
+
+function renderRevisions() {
+  $("revCount").textContent = pageData.revisions.length;
+  const box = $("revList");
+  box.innerHTML = pageData.revisions.slice().reverse().map(r => `
+    <div class="rev-item">
+      <code>${new Date(r.ts * 1000).toLocaleString()}</code><br>
+      <b>${r.field_key}</b>：${fmt(r.old_value)} → <b>${fmt(r.new_value)}</b><br>
+      ${r.old_status} → ${r.new_status}｜${r.editor}｜${r.note || ""}
+    </div>`).join("") || '<div class="fc-meta">暂无修改记录</div>';
+}
+function fmt(v) {
+  if (v === null || v === undefined) return "（空）";
+  return Array.isArray(v) ? v.join("、") : String(v);
+}
+
+loadPage();
+</script>
+</body>
+</html>
