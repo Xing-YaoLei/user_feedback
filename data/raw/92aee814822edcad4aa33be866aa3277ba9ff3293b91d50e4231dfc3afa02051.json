@@ -1,0 +1,17 @@
+{
+  "sha256": "92aee814822edcad4aa33be866aa3277ba9ff3293b91d50e4231dfc3afa02051",
+  "size": 344,
+  "fetches": [
+    {
+      "url": "http://127.0.0.1:61417/ok-utf8.html",
+      "fetched_at": "2026-11-10T17:26:33.239386+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.14.5",
+        "Date": "Tue, 10 Nov 2026 17:26:33 GMT",
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Length": "344"
+      }
+    }
+  ]
+}

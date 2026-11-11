@@ -1,0 +1,17 @@
+{
+  "sha256": "5dfaee007f8258645594e122fb190565638eb4b525ab5f3f03f365f85caafd15",
+  "size": 299,
+  "fetches": [
+    {
+      "url": "http://127.0.0.1:61417/bom-vs-meta.html",
+      "fetched_at": "2026-11-10T17:26:33.245053+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.14.5",
+        "Date": "Tue, 10 Nov 2026 17:26:33 GMT",
+        "Content-Type": "text/html",
+        "Content-Length": "299"
+      }
+    }
+  ]
+}

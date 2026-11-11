@@ -1,0 +1,17 @@
+{
+  "sha256": "cc8f260fc53b8787afb804ec1fe52348f30183eb6fa229324e515b8085e92f03",
+  "size": 261,
+  "fetches": [
+    {
+      "url": "http://127.0.0.1:61417/gb18030-4byte.html",
+      "fetched_at": "2026-11-10T17:26:33.250415+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.14.5",
+        "Date": "Tue, 10 Nov 2026 17:26:33 GMT",
+        "Content-Type": "text/html; charset=gb2312",
+        "Content-Length": "261"
+      }
+    }
+  ]
+}

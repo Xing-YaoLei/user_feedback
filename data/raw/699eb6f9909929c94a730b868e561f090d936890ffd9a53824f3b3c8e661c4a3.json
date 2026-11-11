@@ -1,0 +1,17 @@
+{
+  "sha256": "699eb6f9909929c94a730b868e561f090d936890ffd9a53824f3b3c8e661c4a3",
+  "size": 264,
+  "fetches": [
+    {
+      "url": "http://127.0.0.1:61417/truncated-gb.html",
+      "fetched_at": "2026-11-10T17:26:33.246886+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Server": "BaseHTTP/0.6 Python/3.14.5",
+        "Date": "Tue, 10 Nov 2026 17:26:33 GMT",
+        "Content-Type": "text/html; charset=gb18030",
+        "Content-Length": "264"
+      }
+    }
+  ]
+}

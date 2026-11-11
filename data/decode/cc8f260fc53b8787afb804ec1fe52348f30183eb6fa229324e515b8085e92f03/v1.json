@@ -1,0 +1,58 @@
+{
+  "page_id": "gb18030-4byte.html-cc8f260f",
+  "raw_sha256": "cc8f260fc53b8787afb804ec1fe52348f30183eb6fa229324e515b8085e92f03",
+  "decode_version": "v1",
+  "encoding": "gb18030",
+  "encoding_source": "evidence:http-header",
+  "status": "ok",
+  "decode_policy": "errors='replace'（逐条记录；绝不静默丢弃非法字节）",
+  "override": null,
+  "evidence": {
+    "declarations": [
+      {
+        "source": "http-header",
+        "encoding": "gb2312"
+      },
+      {
+        "source": "html-meta",
+        "encoding": "gb2312"
+      }
+    ],
+    "normalized": [
+      "gb18030"
+    ],
+    "conflict": false,
+    "content_type_header": "text/html; charset=gb2312"
+  },
+  "candidates": [
+    {
+      "name": "gb18030",
+      "source": "evidence:http-header",
+      "derived": false,
+      "replacements": 0,
+      "cjk_chars": 41,
+      "score": 55.0,
+      "selected": true
+    },
+    {
+      "name": "big5",
+      "source": "default",
+      "derived": false,
+      "replacements": 8,
+      "cjk_chars": 35,
+      "score": -435.0,
+      "selected": false
+    },
+    {
+      "name": "utf-8",
+      "source": "default",
+      "derived": false,
+      "replacements": 66,
+      "cjk_chars": 3,
+      "score": -3309.0,
+      "selected": false
+    }
+  ],
+  "replacements": [],
+  "created_at": "2026-11-10T17:26:33.251281+00:00"
+}

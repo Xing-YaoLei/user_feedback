@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>对照报告 double-encoded.html-3c04d002 v1</title>
+<style>
+body { font-family: -apple-system, "PingFang SC", sans-serif; margin: 2em; }
+table { border-collapse: collapse; margin: 1em 0; font-size: 13px; }
+th, td { border: 1px solid #ccc; padding: 3px 8px; text-align: left; }
+tr.repl td { background: #ffd7d7; }
+tr.sel td { background: #d7ecd7; font-weight: bold; }
+.hex { font-family: Menlo, monospace; }
+pre { background: #f5f5f5; padding: 1em; overflow-x: auto; font-size: 12px; }
+h2 { border-bottom: 2px solid #888; padding-bottom: 4px; margin-top: 2em; }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 4px;
+  background: #c0392b; color: #fff; }
+</style></head><body>
+<h1>原始字节 ↔ 文本定位对照报告</h1>
+<p>页面 <b>double-encoded.html-3c04d002</b>　解码版本 <b>v1</b>
+　状态 <span class="badge">needs_review</span></p>
+
+<h2>1. 取证元信息</h2>
+<table>
+<tr><th>URL</th><td>http://127.0.0.1:61417/double-encoded.html</td></tr>
+<tr><th>抓取时间 (UTC)</th><td>2026-11-10T17:26:33.248667+00:00</td></tr>
+<tr><th>SHA-256</th><td class="hex">3c04d002ea5b19c30dfaa83b3e587d889a8c25fbbfd228aeef4daf68bec4587f</td></tr>
+<tr><th>原始字节数</th><td>455</td></tr>
+<tr><th>Content-Type 响应头</th><td>text/html; charset=utf-8</td></tr>
+</table>
+
+<h2>2. 编码声明证据</h2>
+<table><thead><tr><th>来源</th><th>声明编码</th></tr></thead>
+<tbody><tr><td>http-header</td><td>utf-8</td></tr><tr><td>html-meta</td><td>utf-8</td></tr></tbody></table>
+
+<h2>3. 候选编码评估（当前采用：utf-8(via latin-1 双重转码恢复)，来源：derived:mojibake-recovery）</h2>
+<table><thead><tr><th>编码</th><th>来源</th><th>派生</th><th>不可逆替换数</th>
+<th>CJK 字符数</th><th>评分</th></tr></thead>
+<tbody><tr class="sel"><td>utf-8(via latin-1 双重转码恢复)</td><td>derived:mojibake-recovery</td><td>是</td><td>0</td><td>42</td><td>39.0</td></tr><tr><td>gb18030</td><td>default</td><td></td><td>0</td><td>144</td><td>-108.0</td></tr><tr><td>utf-8</td><td>evidence:http-header</td><td></td><td>0</td><td>0</td><td>-216.0</td></tr><tr><td>big5</td><td>default</td><td></td><td>96</td><td>96</td><td>-4872.0</td></tr></tbody></table>
+<p>解码策略：errors=&#x27;replace&#x27;（逐条记录；绝不静默丢弃非法字节）</p>
+
+<h2>4. 不可逆替换位置（U+FFFD，共 0 处）</h2>
+<table><thead><tr><th>字符位置</th><th>字节区间</th><th>原始字节(hex)</th>
+<th>原因</th></tr></thead>
+<tbody><tr><td colspan="4">无（零不可逆替换）</td></tr></tbody></table>
+
+<h2>5. 字节 ↔ 字符对照表</h2>
+<p>本版本为派生（双重转码恢复）结果，字符位置不直接对应原始字节；请以上游基础候选的字节映射为准。</p>
+
+<h2>6. 原始字节十六进制转储</h2>
+<pre>00000000  3c 21 44 4f 43 54 59 50 45 20 68 74 6d 6c 3e 0a   &lt;!DOCTYPE html&gt;·
+00000010  3c 68 74 6d 6c 3e 3c 68 65 61 64 3e 3c 6d 65 74   &lt;html&gt;&lt;head&gt;&lt;met
+00000020  61 20 63 68 61 72 73 65 74 3d 22 75 74 66 2d 38   a charset=&quot;utf-8
+00000030  22 3e 3c 74 69 74 6c 65 3e c3 a7 c2 9f c2 a5 c3   &quot;&gt;&lt;title&gt;·······
+00000040  a9 c2 9d c2 92 c3 a8 c2 bf c2 94 c3 a5 c2 9f c2   ················
+00000050  8e c3 a7 c2 99 c2 bb c3 a8 c2 ae c2 b0 c3 a8 c2   ················
+00000060  a1 c2 a8 3c 2f 74 69 74 6c 65 3e 3c 2f 68 65 61   ···&lt;/title&gt;&lt;/hea
+00000070  64 3e 0a 3c 62 6f 64 79 3e 0a 3c 68 31 3e c3 a7   d&gt;·&lt;body&gt;·&lt;h1&gt;··
+00000080  c2 9f c2 a5 c3 a9 c2 9d c2 92 c3 a8 c2 bf c2 94   ················
+00000090  c3 a5 c2 9f c2 8e c3 a7 c2 99 c2 bb c3 a8 c2 ae   ················
+000000a0  c2 b0 c3 a8 c2 a1 c2 a8 3c 2f 68 31 3e 0a 3c 70   ········&lt;/h1&gt;·&lt;p
+000000b0  3e c3 a5 c2 a7 c2 93 c3 a5 c2 90 c2 8d c3 af c2   &gt;···············
+000000c0  bc c2 9a c3 a5 c2 91 c2 a8 c3 a6 c2 96 c2 87 c3   ················
+000000d0  a6 c2 96 c2 8c 3c 2f 70 3e 0a 3c 70 3e c3 a6 c2   ·····&lt;/p&gt;·&lt;p&gt;···
+000000e0  97 c2 a5 c3 a6 c2 9c c2 9f c3 af c2 bc c2 9a 31   ···············1
+000000f0  39 37 38 c3 a5 c2 b9 c2 b4 31 32 c3 a6 c2 9c c2   978······12·····
+00000100  88 33 30 c3 a6 c2 97 c2 a5 3c 2f 70 3e 0a 3c 70   ·30······&lt;/p&gt;·&lt;p
+00000110  3e c3 a7 c2 bc c2 96 c3 a5 c2 8f c2 b7 c3 af c2   &gt;···············
+00000120  bc c2 9a 45 2d 39 30 30 31 33 3c 2f 70 3e 0a 3c   ···E-90013&lt;/p&gt;·&lt;
+00000130  70 3e c3 a5 c2 a4 c2 87 c3 a6 c2 b3 c2 a8 c3 af   p&gt;··············
+00000140  c2 bc c2 9a c3 a8 c2 bf c2 94 c3 a5 c2 9f c2 8e   ················
+00000150  20 33 20 c3 a4 c2 ba c2 ba c3 af c2 bc c2 8c c3    3 ·············
+00000160  a5 c2 ae c2 89 c3 a7 c2 bd c2 ae c3 a8 c2 b4 c2   ················
+00000170  b9 20 35 30 30 20 c3 a5 c2 85 c2 83 3c 2f 70 3e   · 500 ······&lt;/p&gt;
+00000180  0a 3c 70 3e c3 a5 c2 bd c2 92 c3 a6 c2 a1 c2 a3   ·&lt;p&gt;············
+00000190  c3 a4 c2 ba c2 ba c3 af c2 bc c2 9a c3 a7 c2 8e   ················
+000001a0  c2 8b c3 a6 c2 a1 c2 a3 c3 a6 c2 a1 c2 88 c3 a9   ················
+000001b0  c2 a6 c2 86 3c 2f 70 3e 0a 3c 2f 62 6f 64 79 3e   ····&lt;/p&gt;·&lt;/body&gt;
+000001c0  3c 2f 68 74 6d 6c 3e                              &lt;/html&gt;</pre>
+</body></html>

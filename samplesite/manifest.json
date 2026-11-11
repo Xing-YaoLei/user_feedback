@@ -1,0 +1,38 @@
+[
+  {
+    "file": "ok-utf8.html",
+    "content_type": "text/html; charset=utf-8",
+    "description": "UTF-8，三方声明一致（对照组）",
+    "true_encoding": "utf-8"
+  },
+  {
+    "file": "gb-as-utf8.html",
+    "content_type": "text/html; charset=utf-8",
+    "description": "字节是 GB18030，响应头与 meta 都谎称 UTF-8",
+    "true_encoding": "gb18030"
+  },
+  {
+    "file": "bom-vs-meta.html",
+    "content_type": "text/html",
+    "description": "UTF-8 + BOM，meta 却声明 gb2312，响应头无 charset",
+    "true_encoding": "utf-8"
+  },
+  {
+    "file": "truncated-gb.html",
+    "content_type": "text/html; charset=gb18030",
+    "description": "GB18030，文件末尾多字节字符被截断 1 字节",
+    "true_encoding": "gb18030"
+  },
+  {
+    "file": "double-encoded.html",
+    "content_type": "text/html; charset=utf-8",
+    "description": "UTF-8 文本曾被按 latin-1 误读再存为 UTF-8（重复转码乱码）",
+    "true_encoding": "utf-8"
+  },
+  {
+    "file": "gb18030-4byte.html",
+    "content_type": "text/html; charset=gb2312",
+    "description": "声明 gb2312，实际含 GB18030 四字节字符（𠮷 U+20BB7）",
+    "true_encoding": "gb18030"
+  }
+]

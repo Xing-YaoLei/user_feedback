@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html><head><meta charset="gb2312"><title>供销社账目</title></head>
+<body>
+<h1>供销社账目</h1>
+<p>姓名：张梅</p>
+<p>日期：1962年7月9日</p>
+<p>编号：C-20871</p>
+<p>备注：布匹 250 尺，金额 17.30 元</p>
+<p>归档人：王档案馆</p>
+</body></html>
