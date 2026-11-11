@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>设备目录（测试站）</title>
+  <style>
+    body { font-family: -apple-system, "PingFang SC", sans-serif; margin: 24px; color: #1f2937; }
+    h1 { font-size: 20px; }
+    .filters { display: flex; gap: 16px; align-items: flex-end; margin: 16px 0; }
+    .filter label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; }
+    select { min-width: 180px; padding: 6px 8px; font-size: 14px; }
+    select:disabled { background: #f3f4f6; color: #9ca3af; }
+    button { padding: 7px 18px; font-size: 14px; cursor: pointer; }
+    #status { font-size: 13px; margin: 8px 0; min-height: 20px; }
+    #status.loading { color: #2563eb; }
+    #status.error { color: #dc2626; font-weight: 600; }
+    #status.ready { color: #047857; }
+    #signature { font-family: ui-monospace, monospace; font-size: 12px; color: #6b7280; }
+    table { border-collapse: collapse; width: 100%; margin-top: 8px; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 10px; font-size: 13px; text-align: left; }
+    th { background: #f9fafb; }
+    .empty { padding: 20px; border: 1px dashed #d1d5db; color: #6b7280; margin-top: 8px; }
+    .meta { color: #9ca3af; font-size: 12px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1>医疗设备目录 — 多级筛选</h1>
+
+  <div class="filters">
+    <div class="filter">
+      <label for="region-select">地区</label>
+      <select id="region-select" disabled><option value="">加载中…</option></select>
+    </div>
+    <div class="filter">
+      <label for="institution-select">机构</label>
+      <select id="institution-select" disabled><option value="">请先选择地区</option></select>
+    </div>
+    <div class="filter">
+      <label for="type-select">设备类型</label>
+      <select id="type-select" disabled><option value="">请先选择机构</option></select>
+    </div>
+    <button id="query-btn" disabled>查询</button>
+  </div>
+
+  <div id="status" data-state="idle">正在初始化…</div>
+  <div id="signature" data-signature=""></div>
+
+  <div id="results">
+    <!-- 加载期间不清空旧内容；初始为空，由 app.js 渲染 -->
+  </div>
+
+  <div class="meta">数据源：异步接口 /api/devices；结果签名 = region|institution|type|count</div>
+  <script src="/app.js"></script>
+</body>
+</html>

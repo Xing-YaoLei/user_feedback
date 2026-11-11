@@ -1,0 +1,4 @@
+playwright>=1.65
+pytest>=9
+# 安装后初始化浏览器（本机已有缓存可跳过）：
+#   python -m playwright install chromium
