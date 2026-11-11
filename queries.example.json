@@ -1,0 +1,32 @@
+{
+  "queries": [
+    {
+      "name": "全量商品",
+      "entry_url": "http://127.0.0.1:8000/",
+      "form_name": "search",
+      "button_value": "search",
+      "fields": {"q": "", "category": "全部"},
+      "pager_form_name": "pager",
+      "next_button_value": "next",
+      "max_pages": 10
+    },
+    {
+      "name": "电子类",
+      "entry_url": "http://127.0.0.1:8000/",
+      "form_name": "search",
+      "button_value": "search",
+      "fields": {"q": "", "category": "电子"},
+      "pager_form_name": "pager",
+      "next_button_value": "next"
+    },
+    {
+      "name": "关键词-笔",
+      "entry_url": "http://127.0.0.1:8000/",
+      "form_name": "search",
+      "button_value": "search",
+      "fields": {"q": "笔", "category": "文具"},
+      "pager_form_name": "pager",
+      "next_button_value": "next"
+    }
+  ]
+}
