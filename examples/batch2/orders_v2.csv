@@ -1,0 +1,4 @@
+order_event_id,buyer_id,event_ts,event_name,remark,payload,region
+OE-8001,U200,2026-11-11T14:00:00+08:00,order_placed,v2 新增 region 字段,"{""amount"": 300, ""coupon"": ""NEW10""}",east
+OE-8002,U201,2026-11-11T15:00:00+08:00,order_paid,,"{""amount"": 1200}",north
+OE-8003,U202,2026-11-11T16:00:00+08:00,order_refunded,退款备注,"{""amount"": 50, ""reason"": ""quality""}",south

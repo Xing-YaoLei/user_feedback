@@ -1,0 +1,63 @@
+{
+  "schemas": [
+    {
+      "source": "support",
+      "version": "v1",
+      "id_field": "ticket_id",
+      "source_field": "src",
+      "version_field": "ver",
+      "fields": [
+        {"name": "ticket_id", "type": "string", "required": true, "nullable": false, "description": "客服工单编号"},
+        {"name": "customer_id", "type": "string", "required": true, "nullable": false, "description": "客户编号"},
+        {"name": "created_at", "type": "datetime", "required": true, "nullable": false, "description": "工单创建时间"},
+        {"name": "channel", "type": "string", "required": false, "nullable": false, "description": "渠道：chat/email/phone"},
+        {"name": "rating", "type": "integer", "required": false, "nullable": true, "description": "满意度评分"},
+        {"name": "message", "type": "string", "required": false, "nullable": false, "description": "反馈内容"},
+        {"name": "tags", "type": "json", "required": false, "nullable": true, "description": "标签数组"}
+      ]
+    },
+    {
+      "source": "support",
+      "version": "v2",
+      "id_field": "ticket_id",
+      "source_field": "src",
+      "version_field": "ver",
+      "fields": [
+        {"name": "ticket_id", "type": "string", "required": true, "nullable": false, "description": "客服工单编号"},
+        {"name": "customer_id", "type": "string", "required": true, "nullable": false, "description": "客户编号"},
+        {"name": "created_at", "type": "datetime", "required": true, "nullable": false, "description": "工单创建时间"},
+        {"name": "channel", "type": "string", "required": false, "nullable": false, "description": "渠道：chat/email/phone/in_app"},
+        {"name": "score", "type": "string", "required": false, "nullable": true, "description": "v2 升级：评分改用字符串字段 score（如 \"5\"）"},
+        {"name": "message", "type": "string", "required": false, "nullable": true, "description": "v2 升级：内容允许显式 null"},
+        {"name": "tags", "type": "json", "required": false, "nullable": true, "description": "标签数组"}
+      ]
+    },
+    {
+      "source": "orders",
+      "version": "v1",
+      "id_field": "order_event_id",
+      "fields": [
+        {"name": "order_event_id", "type": "string", "required": true, "nullable": false, "description": "订单事件编号"},
+        {"name": "buyer_id", "type": "string", "required": true, "nullable": false, "description": "买家编号"},
+        {"name": "event_ts", "type": "datetime", "required": true, "nullable": false, "description": "事件时间"},
+        {"name": "event_name", "type": "string", "required": true, "nullable": false, "description": "订单事件名称"},
+        {"name": "remark", "type": "string", "required": false, "nullable": true, "description": "备注"},
+        {"name": "payload", "type": "json", "required": false, "nullable": true, "description": "订单附加信息"}
+      ]
+    },
+    {
+      "source": "orders",
+      "version": "v2",
+      "id_field": "order_event_id",
+      "fields": [
+        {"name": "order_event_id", "type": "string", "required": true, "nullable": false, "description": "订单事件编号"},
+        {"name": "buyer_id", "type": "string", "required": true, "nullable": false, "description": "买家编号"},
+        {"name": "event_ts", "type": "datetime", "required": true, "nullable": false, "description": "事件时间"},
+        {"name": "event_name", "type": "string", "required": true, "nullable": false, "description": "订单事件名称"},
+        {"name": "remark", "type": "string", "required": false, "nullable": true, "description": "备注"},
+        {"name": "payload", "type": "json", "required": false, "nullable": true, "description": "订单附加信息"},
+        {"name": "region", "type": "string", "required": false, "nullable": true, "description": "v2 升级：新增区域字段"}
+      ]
+    }
+  ]
+}

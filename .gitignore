@@ -1,0 +1,13 @@
+# 运行期状态目录（每个 run 的发布结果、台账、待处理清单）
+state/
+state_demo/
+state_crash/
+edge_tmp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/

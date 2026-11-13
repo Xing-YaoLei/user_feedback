@@ -1,0 +1,4 @@
+{"ticket_id": "T-2001", "src": "support", "ver": "v2", "customer_id": "U010", "created_at": "2026-11-11T08:00:00Z", "channel": "in_app", "score": "3", "message": "新版本字段 score 是字符串，映射时转整数", "tags": ["v2"]}
+{"ticket_id": "T-2002", "src": "support", "ver": "v2", "customer_id": "U011", "created_at": "2026-11-11T09:20:00Z", "score": "5", "message": null, "tags": ["v2", "explicit-null"]}
+{"ticket_id": "T-2003", "src": "support", "ver": "v2", "customer_id": "U012", "created_at": "2026-11-11T10:00:00Z", "score": null, "tags": ["v2", "missing-default-demo"]}
+{"ticket_id": "", "src": "support", "ver": "v2", "customer_id": "U013", "created_at": "2026-11-11T10:30:00Z", "message": "事件编号为空，无法建立幂等键"}

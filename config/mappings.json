@@ -1,0 +1,64 @@
+{
+  "mappings": [
+    {
+      "source": "support",
+      "version": "v1",
+      "mapping_version": "support-v1-mapping-1.0",
+      "fields": [
+        {"target": "event_id", "source": "ticket_id"},
+        {"target": "event_type", "constant": "feedback"},
+        {"target": "user_id", "source": "customer_id"},
+        {"target": "event_time", "source": "created_at"},
+        {"target": "channel", "source": "channel"},
+        {"target": "rating", "source": "rating"},
+        {"target": "content", "source": "message", "default": ""},
+        {"target": "extra", "source": "tags"}
+      ]
+    },
+    {
+      "source": "support",
+      "version": "v2",
+      "mapping_version": "support-v2-mapping-1.0",
+      "fields": [
+        {"target": "event_id", "source": "ticket_id"},
+        {"target": "event_type", "constant": "feedback"},
+        {"target": "user_id", "source": "customer_id"},
+        {"target": "event_time", "source": "created_at"},
+        {"target": "channel", "source": "channel", "default": "unknown"},
+        {"target": "rating", "source": "score"},
+        {"target": "content", "source": "message", "default": ""},
+        {"target": "extra", "source": "tags"}
+      ]
+    },
+    {
+      "source": "orders",
+      "version": "v1",
+      "mapping_version": "orders-v1-mapping-1.0",
+      "fields": [
+        {"target": "event_id", "source": "order_event_id"},
+        {"target": "event_type", "source": "event_name"},
+        {"target": "user_id", "source": "buyer_id"},
+        {"target": "event_time", "source": "event_ts"},
+        {"target": "channel", "drop": true},
+        {"target": "rating", "drop": true},
+        {"target": "content", "source": "remark", "default": ""},
+        {"target": "extra", "source": "payload"}
+      ]
+    },
+    {
+      "source": "orders",
+      "version": "v2",
+      "mapping_version": "orders-v2-mapping-1.1",
+      "fields": [
+        {"target": "event_id", "source": "order_event_id"},
+        {"target": "event_type", "source": "event_name"},
+        {"target": "user_id", "source": "buyer_id"},
+        {"target": "event_time", "source": "event_ts"},
+        {"target": "channel", "drop": true},
+        {"target": "rating", "drop": true},
+        {"target": "content", "source": "remark", "default": ""},
+        {"target": "extra", "source": "payload"}
+      ]
+    }
+  ]
+}

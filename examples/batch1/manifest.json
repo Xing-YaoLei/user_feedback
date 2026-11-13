@@ -1,0 +1,8 @@
+{
+  "batch_id": "2026-11-13-demo-batch1",
+  "files": [
+    {"path": "support_v1.jsonl"},
+    {"path": "support_v2.jsonl"},
+    {"path": "orders_v1.csv", "source": "orders", "version": "v1"}
+  ]
+}

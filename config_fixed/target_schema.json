@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {"name": "event_id", "type": "string", "required": true, "nullable": false, "description": "统一事件编号，保留来源系统的原始事件编号"},
+    {"name": "event_type", "type": "string", "required": true, "nullable": false, "description": "事件类型：feedback / order_event"},
+    {"name": "user_id", "type": "string", "required": true, "nullable": false, "description": "使用者编号"},
+    {"name": "event_time", "type": "datetime", "required": true, "nullable": false, "description": "事件发生时间（ISO 8601）"},
+    {"name": "channel", "type": "string", "required": false, "nullable": true, "description": "反馈渠道；订单事件没有渠道概念，允许为 null"},
+    {"name": "rating", "type": "integer", "required": false, "nullable": true, "description": "评分，整数"},
+    {"name": "content", "type": "string", "required": false, "nullable": true, "description": "反馈/事件文本；v2 来源允许显式 null，目标同步放宽为可空"},
+    {"name": "extra", "type": "json", "required": false, "nullable": true, "description": "各来源版本的附加结构，原样透传"}
+  ]
+}

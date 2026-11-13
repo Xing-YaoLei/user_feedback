@@ -1,0 +1,5 @@
+order_event_id,buyer_id,event_ts,event_name,remark,payload
+OE-7001,U100,2026-11-10T12:00:00+08:00,order_placed,首次下单,"{""amount"": 199.0, ""items"": 2}"
+OE-7002,U101,2026-11-10T12:30:00+08:00,order_paid,,"{""amount"": 88.5}"
+OE-7003,U102,2026-11-10T13:00:00+08:00,order_cancelled,用户主动取消,
+OE-7004,U103,not-a-datetime,order_shipped,时间字段格式错误,
