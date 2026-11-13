@@ -1,0 +1,3 @@
+offset=1203 kind=bad_crc declared=12
+offset=4203 kind=bad_crc declared=12
+offset=12003 kind=bad_length declared=16
