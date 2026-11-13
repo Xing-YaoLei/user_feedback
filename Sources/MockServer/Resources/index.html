@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>巡检登记</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --card: #ffffff; --line: #d9dde3; --text: #1d2430;
+    --muted: #6b7280; --brand: #2563eb; --brand-dark: #1d4ed8;
+    --ok-bg: #ecfdf3; --ok-line: #12b76a; --ok-text: #067647;
+    --err-bg: #fef3f2; --err-line: #f04438; --err-text: #b42318;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181d; --card: #1f232b; --line: #333a45; --text: #e6e8ec;
+      --muted: #9aa3af; --brand: #3b82f6; --brand-dark: #60a5fa;
+      --ok-bg: #0d2b20; --ok-line: #12b76a; --ok-text: #6ce9a6;
+      --err-bg: #341715; --err-line: #f04438; --err-text: #fda29b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 28px 24px 48px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; font-size: 13px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 22px 24px;
+  }
+  label { display: block; font-weight: 600; margin: 16px 0 6px; }
+  label:first-child { margin-top: 0; }
+  select, input {
+    width: 100%; padding: 9px 10px; font-size: 14px; color: var(--text);
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    appearance: none; -webkit-appearance: none;
+  }
+  select:disabled, input:disabled { opacity: .55; }
+  .field-note { color: var(--muted); font-size: 12px; font-weight: 400; margin-top: 4px; min-height: 16px; }
+  button {
+    margin-top: 22px; width: 100%; padding: 11px 16px; font-size: 15px; font-weight: 600;
+    color: #fff; background: var(--brand); border: 0; border-radius: 8px; cursor: pointer;
+  }
+  button:hover { background: var(--brand-dark); }
+  button:disabled { opacity: .5; cursor: default; }
+  .result { margin-top: 20px; display: none; border-radius: 10px; padding: 14px 16px; border: 1px solid; }
+  .result.show { display: block; }
+  .result.ok { background: var(--ok-bg); border-color: var(--ok-line); color: var(--ok-text); }
+  .result.err { background: var(--err-bg); border-color: var(--err-line); color: var(--err-text); }
+  .result .title { font-weight: 700; margin-bottom: 4px; }
+  .result code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: rgba(0,0,0,.08); padding: 1px 6px; border-radius: 4px;
+  }
+  .manual-hint { margin-top: 18px; color: var(--muted); font-size: 12px; border-top: 1px dashed var(--line); padding-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>巡检登记</h1>
+  <p class="sub">本地模拟登记页 · 场站与设备联动，设备选项按请求结果刷新</p>
+
+  <div class="card">
+    <form id="reg-form" autocomplete="off">
+      <label for="station">场站</label>
+      <select id="station"><option value="">正在加载场站…</option></select>
+
+      <label for="device">设备名称</label>
+      <select id="device" disabled><option value="">请先选择场站</option></select>
+      <div class="field-note" id="device-note"></div>
+
+      <label for="date">巡检日期</label>
+      <input id="date" type="date" inputmode="numeric" placeholder="YYYY-MM-DD">
+
+      <label for="result">结果</label>
+      <select id="result">
+        <option value="正常">正常</option>
+        <option value="异常">异常</option>
+        <option value="待整改">待整改</option>
+      </select>
+
+      <button type="submit" id="submit-btn">提交登记</button>
+    </form>
+
+    <div id="result-panel" class="result" role="status" aria-live="polite"></div>
+
+    <p class="manual-hint">
+      提示：本页既可手动填写，也由录入助手自动填写。快速切换场站时，页面会丢弃旧场站晚到的设备响应；
+      「待整改」结果会被服务端退回并显示原因。
+    </p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var stationSel = document.getElementById("station");
+  var deviceSel = document.getElementById("device");
+  var deviceNote = document.getElementById("device-note");
+  var dateInput = document.getElementById("date");
+  var resultSel = document.getElementById("result");
+  var form = document.getElementById("reg-form");
+  var submitBtn = document.getElementById("submit-btn");
+  var panel = document.getElementById("result-panel");
+
+  // 单调递增的请求序号：每次切换场站 +1。
+  // 旧请求晚回来时 seq 对不上，响应被直接丢弃 —— 页面侧的竞态防护。
+  var deviceReqSeq = 0;
+  var deviceReady = { stationId: null, promise: null };
+  var stationsLoaded = null;
+
+  function getJSON(url) {
+    return fetch(url, { cache: "no-store" }).then(function (resp) {
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      return resp.json();
+    });
+  }
+
+  function loadStations() {
+    stationsLoaded = getJSON("/api/stations").then(function (list) {
+      stationSel.innerHTML = '<option value="">请选择场站</option>';
+      list.forEach(function (s) {
+        var opt = document.createElement("option");
+        opt.value = s.id;
+        opt.textContent = s.name;
+        stationSel.appendChild(opt);
+      });
+      return list;
+    }).catch(function (err) {
+      stationSel.innerHTML = '<option value="">场站加载失败</option>';
+      throw err;
+    });
+    return stationsLoaded;
+  }
+
+  function loadDevices(stationId) {
+    var seq = ++deviceReqSeq;
+    deviceSel.disabled = true;
+    deviceSel.innerHTML = '<option value="">设备加载中…</option>';
+    deviceNote.textContent = "正在请求该场站的设备列表…";
+
+    var promise = getJSON("/api/devices?stationId=" + encodeURIComponent(stationId))
+      .then(function (list) {
+        if (seq !== deviceReqSeq) {
+          // 旧场站的响应最后才回来：丢弃，绝不覆盖当前场站的选项
+          return Promise.reject(new Error("STALE_DEVICE_RESPONSE"));
+        }
+        deviceSel.innerHTML = '<option value="">请选择设备</option>';
+        list.forEach(function (d) {
+          var opt = document.createElement("option");
+          opt.value = d.id;
+          opt.textContent = d.location ? (d.name + "（" + d.location + "）") : d.name;
+          deviceSel.appendChild(opt);
+        });
+        deviceSel.disabled = false;
+        deviceNote.textContent = "已加载 " + list.length + " 台设备";
+        return list;
+      })
+      .catch(function (err) {
+        if (seq === deviceReqSeq) {
+          deviceSel.innerHTML = '<option value="">设备加载失败，请重选场站</option>';
+          deviceNote.textContent = "加载失败：" + err.message;
+        }
+        throw err;
+      });
+
+    deviceReady = { stationId: stationId, promise: promise };
+    return promise;
+  }
+
+  stationSel.addEventListener("change", function () {
+    clearResult();
+    var id = stationSel.value;
+    if (!id) {
+      deviceReqSeq++;
+      deviceSel.disabled = true;
+      deviceSel.innerHTML = '<option value="">请先选择场站</option>';
+      deviceNote.textContent = "";
+      deviceReady = { stationId: null, promise: null };
+      return;
+    }
+    loadDevices(id);
+  });
+
+  function showResult(kind, title, detailHtml) {
+    panel.className = "result show " + kind;
+    panel.innerHTML = '<div class="title"></div><div class="detail"></div>';
+    panel.querySelector(".title").textContent = title;
+    panel.querySelector(".detail").innerHTML = detailHtml;
+  }
+  function clearResult() {
+    panel.className = "result";
+    panel.innerHTML = "";
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    clearResult();
+    var stationId = stationSel.value;
+    var deviceId = deviceSel.value;
+    var date = dateInput.value;
+    var result = resultSel.value;
+
+    if (!stationId) return showResult("err", "提交被拒绝", "请先选择场站");
+    if (!deviceId) return showResult("err", "提交被拒绝", "请先选择设备");
+    if (!date) return showResult("err", "提交被拒绝", "请填写巡检日期");
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "提交中…";
+
+    fetch("/api/inspections", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ stationId: stationId, deviceId: deviceId, date: date, result: result })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res.ok && res.receiptNo) {
+          showResult("ok", "登记成功", "回执号：<code></code>")
+            .querySelector("code").textContent = res.receiptNo;
+        } else {
+          // 拒绝时把页面上的原因完整展示出来
+          showResult("err", "登记被拒绝", "");
+          panel.querySelector(".detail").textContent = "原因：" + (res.reason || "服务端未给出原因");
+        }
+      })
+      .catch(function (err) {
+        showResult("err", "提交失败", "");
+        panel.querySelector(".detail").textContent = "网络错误：" + err.message;
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "提交登记";
+      });
+  });
+
+  // ---- 原生助手（WKWebView）调用的桥 ----
+  function whenStationsReady() {
+    return (stationsLoaded || loadStations()).then(function () { return true; });
+  }
+
+  function whenDevicesReady(stationId) {
+    if (deviceReady.stationId === stationId && deviceReady.promise) {
+      return deviceReady.promise.then(function () { return true; });
+    }
+    return loadDevices(stationId).then(function () { return true; });
+  }
+
+  window.inspectionBridge = {
+    // 等场站选项就绪后选中场站，并触发联动请求
+    selectStation: function (stationId) {
+      clearResult();
+      return whenStationsReady().then(function () {
+        stationSel.value = stationId;
+        if (stationSel.value !== stationId) throw new Error("场站不存在：" + stationId);
+        return loadDevices(stationId).then(function () { return true; });
+      });
+    },
+    // 关键：必须等「当前场站」的设备选项就绪后再选，旧场站的响应已被序号机制丢弃
+    selectDevice: function (deviceId) {
+      var stationId = stationSel.value;
+      return whenDevicesReady(stationId).then(function () {
+        deviceSel.value = deviceId;
+        if (deviceSel.value !== deviceId) throw new Error("设备不在当前场站选项中：" + deviceId);
+        return true;
+      });
+    },
+    fillForm: function (stationId, deviceId, date, result) {
+      clearResult();
+      return whenStationsReady()
+        .then(function () {
+          stationSel.value = stationId;
+          if (stationSel.value !== stationId) throw new Error("场站不存在：" + stationId);
+          return loadDevices(stationId);
+        })
+        .then(function () {
+          deviceSel.value = deviceId;
+          if (deviceSel.value !== deviceId) throw new Error("设备不在当前场站选项中：" + deviceId);
+          dateInput.value = date;
+          resultSel.value = result;
+          return true;
+        });
+    },
+    readBack: function () {
+      return {
+        stationId: stationSel.value,
+        deviceId: deviceSel.value,
+        date: dateInput.value,
+        result: resultSel.value
+      };
+    },
+    // 点击页面自己的提交按钮，让页面走完整的渲染流程，再把 DOM 上的结果带回去
+    submit: function () {
+      submitBtn.click();
+      return new Promise(function (resolve) {
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (!panel.classList.contains("show") && tries < 100) return;
+          clearInterval(timer);
+          resolve(window.inspectionBridge.getResultPanel());
+        }, 50);
+      });
+    },
+    getResultPanel: function () {
+      if (!panel.classList.contains("show")) return null;
+      var isOk = panel.classList.contains("ok");
+      var code = panel.querySelector("code");
+      var detail = panel.querySelector(".detail");
+      return {
+        ok: isOk,
+        receiptNo: isOk && code ? code.textContent : null,
+        reason: !isOk && detail ? detail.textContent.trim() : null,
+        title: (panel.querySelector(".title") || {}).textContent || ""
+      };
+    }
+  };
+
+  loadStations();
+})();
+</script>
+</body>
+</html>
