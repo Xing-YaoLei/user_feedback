@@ -1,0 +1,28 @@
+{
+  "anchor": "2026-01-01",
+  "nodes": [
+    {"name": "orders", "type": "source", "source": "orders", "missing": "zero"},
+    {"name": "visits", "type": "source", "source": "visits", "missing": "zero"},
+
+    {"name": "orders_7d", "type": "sum",
+     "inputs": [{"node": "orders", "from": -6, "to": 0}]},
+
+    {"name": "orders_7d_prev", "type": "sum",
+     "inputs": [{"node": "orders_7d", "offset": -7}]},
+
+    {"name": "orders_7d_wow", "type": "sum",
+     "inputs": [
+       {"node": "orders_7d"},
+       {"node": "orders_7d_prev", "weight": -1}
+     ]},
+
+    {"name": "cum_orders", "type": "sum",
+     "inputs": [{"node": "orders", "from": "start", "to": 0}]},
+
+    {"name": "orders_minus_visits_7d", "type": "sum",
+     "inputs": [
+       {"node": "orders_7d"},
+       {"node": "visits", "from": -6, "to": 0, "weight": -1}
+     ]}
+  ]
+}
