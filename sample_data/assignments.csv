@@ -1,0 +1,19 @@
+user_id,layer,group,assigned_at
+u01,L1,control,2026-03-01 09:00:00
+u02,L1,control,2026-03-01 10:00:00
+u03,L1,control,2026-03-01 11:00:00
+u04,L1,treatment,2026-03-01 09:30:00
+u05,L1,treatment,2026-03-01 10:30:00
+u06,L1,treatment,2026-03-01 11:30:00
+u07,L1,control,2026-03-18 08:00:00
+u08,L2,control,2026-03-02 09:00:00
+u09,L2,control,2026-03-02 10:00:00
+u10,L2,treatment,2026-03-02 09:30:00
+u11,L2,treatment,2026-03-19 08:00:00
+u12,L3,control,2026-03-01 09:00:00
+u13,L3,treatment,2026-03-19 09:00:00
+u14,L4,control,2026-03-01 09:00:00
+u15,L4,control,2026-03-01 10:00:00
+u16,L4,treatment,2026-03-01 09:30:00
+u17,L4,treatment,2026-03-01 10:30:00
+u18,L4,treatment,2026-03-01 11:30:00
