@@ -1,0 +1,17 @@
+{
+  "name": "supplier-catalog-collector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "供应商供货清单采集与看板：每日采集、断点续采、限流排队、快照原子替换",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "mock": "node src/mock-server.js",
+    "test": "node --test test/"
+  }
+}

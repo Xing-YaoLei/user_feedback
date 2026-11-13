@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>供货清单 · 采购开工台</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">采</span>
+      <div>
+        <h1>供货清单</h1>
+        <p class="brand-sub">采购开工看板 · 只显示已收齐的快照</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span class="clock" id="clock">—</span>
+      <button class="btn ghost" id="refresh-all" type="button">全部立即采集</button>
+      <button class="btn ghost" id="open-settings" type="button">来源设置</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary" id="summary" aria-label="今日总体进度"></section>
+
+    <section class="board-head">
+      <h2>今日进度</h2>
+      <div class="board-head-meta">
+        <span id="board-note">每 60 秒自动刷新</span>
+        <button class="btn tiny" id="refresh" type="button">刷新</button>
+      </div>
+    </section>
+    <section class="board" id="board" aria-live="polite"></section>
+
+    <section class="panel" id="detail-panel" hidden>
+      <div class="panel-head">
+        <div>
+          <h2 id="detail-title">清单</h2>
+          <p class="muted" id="detail-sub"></p>
+        </div>
+        <div class="panel-head-actions">
+          <input class="search" id="detail-search" type="search" placeholder="搜索商品 / SKU / 产地" />
+          <button class="btn tiny" id="detail-close" type="button">关闭</button>
+        </div>
+      </div>
+      <div class="detail-meta" id="detail-meta"></div>
+      <div class="table-wrap">
+        <table class="products">
+          <thead>
+            <tr>
+              <th>SKU</th><th>商品</th><th>品类</th><th>单位</th><th class="num">单价（元）</th><th class="num">库存</th><th>产地</th>
+            </tr>
+          </thead>
+          <tbody id="detail-rows"></tbody>
+        </table>
+      </div>
+      <p class="table-empty" id="detail-empty" hidden>没有匹配的商品。</p>
+    </section>
+
+    <section class="panel" id="settings-panel" hidden>
+      <div class="panel-head">
+        <div>
+          <h2>来源设置</h2>
+          <p class="muted">填写各来源的接口地址、采集时间和每分钟请求上限。保存后按新计划执行；改地址会作废旧游标。</p>
+        </div>
+        <div class="panel-head-actions">
+          <button class="btn tiny" id="settings-close" type="button">关闭</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="settings">
+          <thead>
+            <tr>
+              <th>名称</th><th>接口地址</th><th>采集时间</th><th class="num">请求/分钟</th><th class="num">每页条数</th><th>启用</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="settings-rows"></tbody>
+        </table>
+      </div>
+      <div class="settings-actions">
+        <button class="btn" id="settings-add" type="button">新增来源</button>
+        <button class="btn primary" id="settings-save" type="button">保存设置</button>
+        <span class="settings-msg" id="settings-msg"></span>
+      </div>
+      <div class="mock-hint" id="mock-hint" hidden>
+        <strong>本地模拟接口</strong>
+        <span id="mock-hint-text"></span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span id="foot-status">正在加载…</span>
+  </footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
