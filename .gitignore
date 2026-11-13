@@ -1,0 +1,11 @@
+# Build output
+bin/
+obj/
+*.user
+*.nupkg
+
+# Intake state produced by local runs
+state/
+drop/
+artifacts/*.out
+artifacts/*.log
