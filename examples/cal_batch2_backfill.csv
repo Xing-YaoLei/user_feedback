@@ -1,0 +1,3 @@
+cal_id,instrument,registered_at,valid_from,valid_to,coefficient
+C2,PH-01,2026-07-15T09:30:00Z,2026-06-01T00:00:00Z,2026-07-01T00:00:00Z,3.0
+C3,PH-01,2026-07-15T09:30:00Z,2026-06-20T00:00:00Z,2026-08-01T00:00:00Z,x*1.0+7

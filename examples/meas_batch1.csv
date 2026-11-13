@@ -1,0 +1,4 @@
+measurement_id,instrument,measured_at,raw_reading
+M1,PH-01,2026-06-15T08:00:00Z,10
+M2,PH-01,2026-06-16T08:00:00Z,5
+M9,DO-02,2026-06-15T08:00:00Z,3
