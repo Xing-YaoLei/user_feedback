@@ -1,0 +1,74 @@
+{
+  "_comment": "帮助中心比对规则模板。两份站点副本各自一份规则；root 相对本文件所在目录解析。",
+  "old": {
+    "root": "./sites/old",
+    "crawl": {
+      "index_pages": ["index.html"],
+      "base_url": "http://help.example.com/",
+      "stay_inside_root": true,
+      "include_patterns": [],
+      "exclude_patterns": ["/assets/search/"],
+      "max_pages": 0
+    },
+    "article": {
+      "url_pattern": "/articles/(\\d+)",
+      "url_group": 1,
+      "id_selector": null,
+      "id_attr": "content",
+      "language": {
+        "from": "url",
+        "pattern": "/(en|zh|ja)/",
+        "group": 1,
+        "selector": null,
+        "attr": "lang",
+        "fixed": null
+      },
+      "title_selector": "h1.article-title",
+      "title_attr": null,
+      "body_selector": "div.article-body",
+      "body_mode": "text",
+      "attachments": {
+        "container_selector": null,
+        "link_selector": "a[href]",
+        "href_attr": "href",
+        "include_patterns": ["\\.(pdf|docx?|xlsx?|zip|png|jpe?g)$"],
+        "exclude_patterns": ["^#", "^mailto:", "^tel:", "^javascript:"]
+      }
+    }
+  },
+  "new": {
+    "root": "./sites/new",
+    "crawl": {
+      "index_pages": ["index.html", "en/index.html"],
+      "base_url": "http://help.example.com/",
+      "stay_inside_root": true,
+      "include_patterns": [],
+      "exclude_patterns": ["/assets/search/"],
+      "max_pages": 0
+    },
+    "article": {
+      "url_pattern": "/help/article[?/]id=(\\d+)",
+      "url_group": 1,
+      "id_selector": null,
+      "id_attr": "data-article-id",
+      "language": {
+        "from": "element",
+        "pattern": null,
+        "selector": "html",
+        "attr": "lang",
+        "fixed": null
+      },
+      "title_selector": "main article h1",
+      "title_attr": null,
+      "body_selector": "main article section.content",
+      "body_mode": "text",
+      "attachments": {
+        "container_selector": null,
+        "link_selector": "a[href]",
+        "href_attr": "href",
+        "include_patterns": ["\\.(pdf|docx?|xlsx?|zip|png|jpe?g)$"],
+        "exclude_patterns": ["^#", "^mailto:", "^tel:", "^javascript:"]
+      }
+    }
+  }
+}
