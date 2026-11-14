@@ -1,12 +1,25 @@
 {
   "sample_id_column": "样件号",
+  "round_column": "检测轮次",
   "version_column": "模板版本",
+  "default_priority": 0,
+  "sources": {
+    "device_a.csv": 10,
+    "device_b.csv": 20,
+    "device_c.csv": 10
+  },
+  "tolerances": {
+    "总长": "0.05",
+    "宽度": "0.1",
+    "端部余量": "0.05",
+    "框边厚": "0.05"
+  },
   "versions": {
     "TPL-1.0": {
       "columns": [
         {
           "source_column": "L",
-          "item": "长度",
+          "item": "总长",
           "source_unit": "mm",
           "standard_unit": "mm",
           "factor": "1",
@@ -21,6 +34,24 @@
           "factor": "1",
           "min": "45",
           "max": "55"
+        },
+        {
+          "source_column": "END",
+          "item": "端部余量",
+          "source_unit": "mm",
+          "standard_unit": "mm",
+          "factor": "1",
+          "min": "0",
+          "max": "20"
+        },
+        {
+          "source_column": "FRAME",
+          "item": "框边厚",
+          "source_unit": "mm",
+          "standard_unit": "mm",
+          "factor": "1",
+          "min": "0",
+          "max": "10"
         }
       ]
     },
@@ -28,7 +59,7 @@
       "columns": [
         {
           "source_column": "L",
-          "item": "长度",
+          "item": "总长",
           "source_unit": "in",
           "standard_unit": "mm",
           "factor": "25.4",
@@ -43,8 +74,43 @@
           "factor": "25.4",
           "min": "45",
           "max": "55"
+        },
+        {
+          "source_column": "END",
+          "item": "端部余量",
+          "source_unit": "in",
+          "standard_unit": "mm",
+          "factor": "25.4",
+          "min": "0",
+          "max": "20"
+        },
+        {
+          "source_column": "FRAME",
+          "item": "框边厚",
+          "source_unit": "in",
+          "standard_unit": "mm",
+          "factor": "25.4",
+          "min": "0",
+          "max": "10"
         }
       ]
     }
-  }
+  },
+  "derived": [
+    {
+      "item": "净长",
+      "standard_unit": "mm",
+      "formula": "{总长} - 2 * {端部余量}"
+    },
+    {
+      "item": "净宽",
+      "standard_unit": "mm",
+      "formula": "{宽度} - 2 * {框边厚}"
+    },
+    {
+      "item": "内框长",
+      "standard_unit": "mm",
+      "formula": "{净长} - 2 * {框边厚}"
+    }
+  ]
 }
