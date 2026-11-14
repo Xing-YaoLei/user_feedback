@@ -1,0 +1,9 @@
+{"line_id": "L1", "timestamp": "2026-11-12T07:00:00+08:00", "seq": 1, "status": "RUNNING"}
+{"line_id": "L1", "timestamp": "2026-11-12T22:10:00+08:00", "seq": 2, "status": "RUNNING"}
+{"line_id": "L2", "timestamp": "2026-11-12T09:30:00+08:00", "seq": 3, "status": "运行"}
+{"line_id": "L1", "timestamp": "2026-11-12T21:55:00+08:00", "seq": 1, "status": "RUNNING"}
+{"line_id": "L1", "timestamp": "2026-11-12T21:55:00+08:00", "seq": 2, "status": "DOWN"}
+{"line_id": "L2", "timestamp": "2026-11-12T15:00:00+08:00", "seq": 3, "status": "停机"}
+{"line_id": "L1", "timestamp": "2026-11-12T22:10:00+08:00", "seq": 2, "status": "RUNNING"}
+{"line_id": "L1", "timestamp": "2026-11-12T23:30:00Z", "seq": 2, "status": "RUNNING"}
+{"line_id": "L1", "timestamp": "2026-11-13T07:30:00+08:00", "seq": 2, "status": "RUNNING"}
