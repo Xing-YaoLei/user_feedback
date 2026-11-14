@@ -1,0 +1,6 @@
+﻿样件号,测量项,拒收原因,模板版本,原文件,行号,列名,原值
+S002,长度,空值,TPL-1.0,device_a.csv,3,L,
+S003,宽度,非数字,TPL-1.0,device_a.csv,4,W,abc
+S004,长度,超范围,TPL-1.0,device_a.csv,5,L,120.0
+S102,长度,超范围,TPL-2.0,device_b.csv,3,L,4.500
+S103,宽度,空值,TPL-2.0,device_b.csv,4,W,

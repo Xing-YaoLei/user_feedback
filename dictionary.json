@@ -1,0 +1,50 @@
+{
+  "sample_id_column": "样件号",
+  "version_column": "模板版本",
+  "versions": {
+    "TPL-1.0": {
+      "columns": [
+        {
+          "source_column": "L",
+          "item": "长度",
+          "source_unit": "mm",
+          "standard_unit": "mm",
+          "factor": "1",
+          "min": "90",
+          "max": "110"
+        },
+        {
+          "source_column": "W",
+          "item": "宽度",
+          "source_unit": "mm",
+          "standard_unit": "mm",
+          "factor": "1",
+          "min": "45",
+          "max": "55"
+        }
+      ]
+    },
+    "TPL-2.0": {
+      "columns": [
+        {
+          "source_column": "L",
+          "item": "长度",
+          "source_unit": "in",
+          "standard_unit": "mm",
+          "factor": "25.4",
+          "min": "90",
+          "max": "110"
+        },
+        {
+          "source_column": "W",
+          "item": "宽度",
+          "source_unit": "in",
+          "standard_unit": "mm",
+          "factor": "25.4",
+          "min": "45",
+          "max": "55"
+        }
+      ]
+    }
+  }
+}
