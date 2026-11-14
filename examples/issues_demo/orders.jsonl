@@ -1,0 +1,8 @@
+{"order_id": "M-01", "inputs": [{"batch_id": "P001", "weight_kg": 50}, {"batch_id": "GHOST", "weight_kg": 50}], "outputs": [{"batch_id": "A1", "weight_kg": 99}], "loss_kg": 1}
+{"order_id": "M-02", "inputs": [{"batch_id": "DUP", "weight_kg": 5}], "outputs": [{"batch_id": "B1", "weight_kg": 4}], "loss_kg": 1}
+{"order_id": "M-03", "inputs": [{"batch_id": "P002", "weight_kg": 50}], "outputs": [{"batch_id": "C1", "weight_kg": 49}], "loss_kg": 0}
+{"order_id": "M-04", "inputs": [{"batch_id": "A1", "weight_kg": 10}], "outputs": [{"batch_id": "D1", "weight_kg": 9}], "loss_kg": 1}
+{"order_id": "M-05", "inputs": [{"batch_id": "P003", "weight_kg": 8}, {"batch_id": "P003", "weight_kg": 5}], "outputs": [{"batch_id": "E1", "weight_kg": 12}], "loss_kg": 1}
+{"order_id": "M-06", "inputs": [{"batch_id": "F1", "weight_kg": 10}], "outputs": [{"batch_id": "F2", "weight_kg": 9}], "loss_kg": 1}
+{"order_id": "M-07", "inputs": [{"batch_id": "F2", "weight_kg": 5}], "outputs": [{"batch_id": "F1", "weight_kg": 4}], "loss_kg": 1}
+{"order_id": "M-08", "inputs": [{"batch_id": "P004", "weight_kg": 20}], "outputs": [{"batch_id": "G1", "weight_kg": 19}], "loss_kg": 1}
