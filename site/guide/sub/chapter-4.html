@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>第 4 章 同一片段引用两次</title>
+</head>
+<body>
+  <main>
+    <h1>第 4 章 同一片段引用两次</h1>
+
+    <section id="top">
+      <p>同一个片段在本章会出现两次，索引里也应出现两次。</p>
+      <p>第一次展开安装步骤：<a data-include href="../../shared/basics.html#install">安装</a>。</p>
+      <p>中间插入一段普通正文，用来确认两次出现之间仍有本章自己的段落。</p>
+      <p>第二次展开深入说明：<a data-include href="../../shared/advanced.html#deep">深入说明</a>。</p>
+      <p>收尾段落。</p>
+    </section>
+
+    <h2 id="repeat">再来一次</h2>
+    <p>这里再次引用安装片段：<a data-include href="../../shared/basics.html#install">安装</a>。</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>高级说明</title>
+</head>
+<body>
+  <main>
+    <h1>高级说明</h1>
+
+    <section id="deep">
+      <h2>深入说明</h2>
+      <p>深入说明的第一段解释了配置项的优先级。</p>
+      <p>深入说明里还会展开共享的入门片段：<a data-include href="basics.html#install">安装</a>。</p>
+    </section>
+
+    <section id="loop-a">
+      <h2>环 A</h2>
+      <p>环 A 的第一段。</p>
+      <p>环 A 会继续展开环 B：<a data-include href="#loop-b">环 B</a>。</p>
+    </section>
+
+    <section id="loop-b">
+      <h2>环 B</h2>
+      <p>环 B 的第一段。</p>
+      <p>环 B 又指回环 A：<a data-include href="advanced.html#loop-a">环 A</a>。</p>
+    </section>
+  </main>
+</body>
+</html>
