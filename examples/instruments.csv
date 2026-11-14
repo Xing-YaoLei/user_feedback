@@ -1,0 +1,4 @@
+device_registration_number,measurement_item,value
+DEV-1001,height,178.5
+DEV-1002,weight,72
+DEV-9999,height,170

@@ -1,0 +1,6 @@
+{
+  "purposes": {
+    "cohort-linkage": ["instrument", "field"],
+    "instrument-only": ["instrument"]
+  }
+}

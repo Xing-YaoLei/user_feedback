@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "participant-linkage"
+version = "0.1.0"
+description = "Purpose-scoped, deterministic linkage of instrument and field records"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+participant-linkage = "linkage.cli:main"
+
+[tool.setuptools]
+packages = ["linkage"]

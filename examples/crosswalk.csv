@@ -1,0 +1,5 @@
+source,registration_number,master_id
+instrument,DEV-1001,M-001
+instrument,DEV-1002,M-002
+field,OBS-101,M-001
+field,OBS-102,M-002
