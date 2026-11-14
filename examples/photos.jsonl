@@ -1,0 +1,8 @@
+{"photo_id": "A-P1", "file_path": "/photos/A/P1.jpg", "station": "A", "timestamp_ms": 1100}
+{"photo_id": "A-P2", "file_path": "/photos/A/P2.jpg", "station": "A", "timestamp_ms": 2100}
+{"photo_id": "B-P1", "file_path": "/photos/B/P1.jpg", "station": "B", "timestamp_ms": 1500}
+{"photo_id": "C-P1", "file_path": "/photos/C/P1.jpg", "station": "C", "timestamp_ms": 4000}
+{"photo_id": "D-P1", "file_path": "/photos/D/P1.jpg", "station": "D", "timestamp_ms": 1050}
+{"photo_id": "D-P2", "file_path": "/photos/D/P2.jpg", "station": "D", "timestamp_ms": 5000}
+{"photo_id": "E-P1", "file_path": "/photos/E/P1.jpg", "station": "E", "timestamp_ms": 1500}
+{"photo_id": "E-P2", "file_path": "/photos/E/P2.jpg", "station": "E", "timestamp_ms": 1500}
