@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+# 本地账本与虚拟环境不入库
+ledger/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/

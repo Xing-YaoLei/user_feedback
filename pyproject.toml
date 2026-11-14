@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "power-ledger"
+version = "0.1.0"
+description = "车间用电按北京时间业务日归集，规则变更先出影响清单、确认后只重算受影响日期"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+power-ledger = "power_ledger.cli:main"
+
+[tool.setuptools]
+packages = ["power_ledger"]
