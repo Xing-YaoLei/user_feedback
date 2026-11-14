@@ -1,0 +1,30 @@
+{
+  "max_concurrency": 3,
+  "backoff_base_seconds": 1,
+  "backoff_cap_seconds": 30,
+  "logfile": "shuttle.log",
+  "dispatcher": {
+    "host": "127.0.0.1",
+    "port": 8090
+  },
+  "parks": [
+    {
+      "id": "north",
+      "url": "http://127.0.0.1:8080/shuttle/parks/north",
+      "interval_seconds": 3,
+      "timeout_seconds": 2
+    },
+    {
+      "id": "south",
+      "url": "http://127.0.0.1:8080/shuttle/parks/south",
+      "interval_seconds": 5,
+      "timeout_seconds": 2
+    },
+    {
+      "id": "east",
+      "url": "http://127.0.0.1:8080/shuttle/parks/east",
+      "interval_seconds": 7,
+      "timeout_seconds": 2
+    }
+  ]
+}
