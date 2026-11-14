@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "audit-sampling"
+version = "1.0.0"
+description = "Deterministic, mergeable stratified sampling for distributed newspaper scan review"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+audit-sampling = "audit_sampling.cli:main"
+
+[tool.setuptools]
+packages = ["audit_sampling"]
