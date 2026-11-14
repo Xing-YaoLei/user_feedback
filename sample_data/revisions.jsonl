@@ -1,0 +1,2 @@
+{"doc_id": "doc1", "parent_digest": "98ab4d3aeab1e120560e942e2df6a0db1147bf94bafcf1590000ffb3c2b6fc80", "post_digest": "69726aa4696684f51191101c90b115e8cf6e01d6339e158d01b69ca692562fbf", "ops": [{"type": "replace", "start": 6, "end": 10, "text": "BETA"}]}
+{"doc_id": "doc1", "parent_digest": "69726aa4696684f51191101c90b115e8cf6e01d6339e158d01b69ca692562fbf", "post_digest": "e9ed35c82703d2bdc33488c8e116b30d6ab75b484106c776691a22c153c3981d", "ops": [{"type": "insert", "position": 0, "text": "NOTE: "}]}
