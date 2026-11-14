@@ -1,0 +1,22 @@
+# Worked example.
+#
+# AQ-01 session S1:
+#   count 100 -> 1_000_000 us
+#   count 300 -> 1_040_000 us   (200 counts per 40_000 us)
+#   count 500 -> 1_090_000 us   (200 counts per 50_000 us)
+# Session S2 is a reboot: its counter restarts near zero but maps to later UTC.
+# Session S3 has count 0 mapped to two different times -> rejected whole session.
+# AQ-02 session S2 has time running backwards as count grows -> rejected.
+device_id,session_id,count,utc_us
+AQ-01,S1,100,1000000
+AQ-01,S1,300,1040000
+AQ-01,S1,500,1090000
+AQ-01,S2,10,1950000
+AQ-01,S2,50,1990000
+AQ-01,S3,0,3000000
+AQ-01,S3,100,3010000
+AQ-01,S3,0,3000500
+AQ-02,S1,0,2500000
+AQ-02,S1,1000,2600000
+AQ-02,S2,0,2700000
+AQ-02,S2,100,2690000
