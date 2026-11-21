@@ -1,0 +1,16 @@
+{
+  "name": "byte-mux-rpc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bidirectional multiplexed RPC over one byte stream with flow control, cancellation and half-close",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
