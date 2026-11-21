@@ -1,0 +1,14 @@
+{
+  "name": "correlation-subscription",
+  "version": "1.0.0",
+  "description": "Event-time correlation subscriptions with provisional results, revision and finalisation",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec test/*.test.ts",
+    "demo": "node examples/demo.ts"
+  }
+}
