@@ -1,0 +1,13 @@
+{
+  "name": "replica-rebalance-planner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "事件总线分区副本分配与迁移规划模块（TypeScript，Node 原生类型擦除运行）",
+  "scripts": {
+    "test": "node --test test/*.test.ts"
+  },
+  "engines": {
+    "node": ">=23.6"
+  }
+}
