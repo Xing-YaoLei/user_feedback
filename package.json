@@ -1,0 +1,13 @@
+{
+  "name": "raft-coordination-sm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Raft coordination state machine in TypeScript on Node.js with deterministic injected scheduler",
+  "scripts": {
+    "test": "node --test \"tests/*.test.ts\""
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
