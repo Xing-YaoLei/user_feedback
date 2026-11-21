@@ -1,0 +1,19 @@
+{
+  "name": "lease-lock-coordinator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lease-based distributed lock coordinator with shared/exclusive locks, upgrade, fencing tokens and wait-for deadlock detection",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec test/lock-coordinator.test.ts"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "license": "MIT"
+}
