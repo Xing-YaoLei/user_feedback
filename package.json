@@ -1,0 +1,16 @@
+{
+  "name": "interceptor-runtime",
+  "version": "1.0.0",
+  "private": true,
+  "description": "可递归发起子请求、带取消传播与分层异步清理的 Node.js 请求拦截器运行模块（TypeScript，无第三方依赖）",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec test/"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}
