@@ -1,0 +1,13 @@
+{
+  "name": "raft-coordinator",
+  "version": "1.0.0",
+  "description": "Raft coordinated state machine on Node.js with joint-consensus membership changes, driven by an injected deterministic scheduler",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test --test-force-exit --test-reporter=spec test/"
+  },
+  "license": "MIT"
+}
