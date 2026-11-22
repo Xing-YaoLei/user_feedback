@@ -1,0 +1,14 @@
+{
+  "name": "lease-registry",
+  "version": "1.0.0",
+  "description": "Embeddable service-discovery registry: session leases, batched atomic mutations, snapshot pagination, resumable revision-based watch.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test --experimental-strip-types test/registry.test.ts test/client.test.ts test/scenario.test.ts",
+    "demo": "node --experimental-strip-types src/scenario.ts"
+  },
+  "license": "MIT"
+}
