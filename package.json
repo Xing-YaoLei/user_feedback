@@ -1,0 +1,14 @@
+{
+  "name": "layered-config-evaluator",
+  "version": "1.0.0",
+  "description": "Layered conditional configuration evaluator with exact units, dependency chains, and incremental batch recomputation",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec \"test/**/*.test.ts\"",
+    "demo": "node src/demo.ts"
+  }
+}
