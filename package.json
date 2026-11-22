@@ -1,0 +1,13 @@
+{
+  "name": "route-template-compiler",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Route template compiler: exact overlap detection, matching and reverse generation",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
