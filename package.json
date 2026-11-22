@@ -1,0 +1,14 @@
+{
+  "name": "config-three-way-merge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "配置中心结构化三方合并模块（对象 / 标量 / 带稳定元素 ID 的有序数组 / 按 ID 引用）",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "test": "node --test test/merge.test.ts",
+    "demo": "node examples/demo.ts"
+  }
+}
