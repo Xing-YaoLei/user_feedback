@@ -1,0 +1,10 @@
+{
+  "name": "distributed-snapshot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "非 FIFO 通道上的多轮并发分布式快照模块(Chandy-Lamport / Lai-Yang 风格)",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}
