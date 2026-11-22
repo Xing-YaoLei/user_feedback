@@ -1,0 +1,13 @@
+{
+  "name": "replica-planner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "分区副本分配与迁移规划模块：故障域/容量约束下的最优目标分配、安全迁移规划与可控异步执行",
+  "scripts": {
+    "test": "node --test --test-reporter=spec test/"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
