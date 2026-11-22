@@ -1,0 +1,13 @@
+{
+  "name": "gateway-cache",
+  "version": "1.0.0",
+  "description": "HTTP 网关共享缓存：字节片段合并、Vary/新鲜度/条件校验、并发回源共享与 LRU 容量核算",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec test/"
+  },
+  "license": "MIT"
+}
