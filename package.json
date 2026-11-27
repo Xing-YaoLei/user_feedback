@@ -1,0 +1,14 @@
+{
+  "name": "capability-negotiation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic cross-service capability negotiation with minimal unsatisfiable cores and resumable search.",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "demo": "node src/demo.ts"
+  }
+}
