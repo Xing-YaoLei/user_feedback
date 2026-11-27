@@ -1,0 +1,14 @@
+{
+  "name": "txn-log-view",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "单分区事务日志视图：read_uncommitted / read_committed 读取、事务代次栅栏与中止语义",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test test/txn-log.test.ts test/epoch.test.ts",
+    "demo": "node src/demo.ts"
+  }
+}
