@@ -1,0 +1,20 @@
+{
+  "name": "exclusive-connection-lease-pool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An exclusive connection lease pool for Node.js with injected clock and adapter, capacity accounting, FIFO waiting, lifetime retirement, and lease credentials.",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --test --test-timeout=15000 test/*.test.ts",
+    "test:watch": "node --test --watch test/*.test.ts",
+    "demo": "node examples/demo.ts"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}
