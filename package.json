@@ -1,0 +1,22 @@
+{
+  "name": "metadata-dictionary-codec",
+  "version": "1.0.0",
+  "description": "Paired metadata encoder/decoder: an ordered dynamic-dictionary channel and an ordered request-block channel, generation-tagged slot references, blocked-block limits and eviction protection.",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./wire": "./src/wire.ts",
+    "./encoder": "./src/encoder.ts",
+    "./decoder": "./src/decoder.ts"
+  },
+  "scripts": {
+    "test": "node --test test/",
+    "demo": "node src/demo.ts",
+    "check": "node --check src/wire.ts && node --check src/encoder.ts && node --check src/decoder.ts && node --check src/index.ts"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "license": "MIT"
+}
