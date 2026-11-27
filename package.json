@@ -1,0 +1,14 @@
+{
+  "name": "counting-bloom-interest-summary",
+  "version": "1.0.0",
+  "description": "计数 Bloom 兴趣摘要：允许碰撞多转发、不漏掉有效订阅，支持分步重建更换容量与哈希参数",
+  "type": "module",
+  "main": "src/index.ts",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "license": "MIT"
+}
