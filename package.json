@@ -1,0 +1,32 @@
+{
+  "name": "grpc-web-response-decoder",
+  "version": "1.0.0",
+  "description": "Incremental gRPC-Web response body decoder for Node.js (binary and grpc-web-text) with strict trailer validation and stream backpressure",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "test": "node --test --test-timeout=20000 test/",
+    "test:watch": "node --test --watch test/",
+    "example": "node examples/basic.ts"
+  },
+  "keywords": [
+    "grpc-web",
+    "grpc-web-text",
+    "protobuf",
+    "decoder",
+    "stream"
+  ],
+  "license": "MIT",
+  "private": true
+}
