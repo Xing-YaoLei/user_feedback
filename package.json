@@ -1,0 +1,11 @@
+{
+  "name": "adaptive-rpc-admission",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "自适应 RPC 准入控制：采样轮、p90/基线动态并发上限、FIFO 等待与取消",
+  "scripts": {
+    "test": "node --test tests/",
+    "demo": "node examples/demo.ts"
+  }
+}
