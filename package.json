@@ -1,0 +1,17 @@
+{
+  "name": "deadline-scheduler",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Exact-nanosecond, generation-safe deadline scheduler for Node.js",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "start": "node src/demo.ts"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
