@@ -1,0 +1,14 @@
+{
+  "name": "multipart-form-parser",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Streaming multipart/form-data parser with backpressure, bounded discard and strict limits",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "demo": "node examples/demo.ts"
+  }
+}
