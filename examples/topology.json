@@ -1,0 +1,42 @@
+{
+  "description": "Reference topology: diamond merge, normal binding cycle, alternate chain and alternate cycle. See README for expected routing outcomes.",
+  "exchanges": [
+    { "name": "ingress", "kind": "topic", "alternateExchange": "dlx-entry" },
+    { "name": "split", "kind": "fanout" },
+    { "name": "left", "kind": "topic" },
+    { "name": "right", "kind": "direct", "alternateExchange": "shadow-dlx" },
+    { "name": "cycle-a", "kind": "fanout" },
+    { "name": "cycle-b", "kind": "fanout" },
+    { "name": "shadow-dlx", "kind": "fanout" },
+    { "name": "dlx-entry", "kind": "fanout" },
+    { "name": "chain-a", "kind": "fanout", "alternateExchange": "chain-b" },
+    { "name": "chain-b", "kind": "fanout", "alternateExchange": "chain-c" },
+    { "name": "chain-c", "kind": "fanout" },
+    { "name": "alt-a", "kind": "fanout", "alternateExchange": "alt-b" },
+    { "name": "alt-b", "kind": "fanout", "alternateExchange": "alt-a" },
+    { "name": "dead-end", "kind": "direct" }
+  ],
+  "queues": [
+    { "name": "q-left" },
+    { "name": "q-right" },
+    { "name": "q-dead" },
+    { "name": "q-shadow" },
+    { "name": "q-chain" },
+    { "name": "q-orphan" }
+  ],
+  "bindings": [
+    { "id": "b01", "source": "ingress", "destination": "split", "destinationKind": "exchange", "routingKey": "order.#" },
+    { "id": "b02", "source": "split", "destination": "left", "destinationKind": "exchange" },
+    { "id": "b03", "source": "split", "destination": "right", "destinationKind": "exchange" },
+    { "id": "b04", "source": "left", "destination": "q-left", "destinationKind": "queue", "routingKey": "order.*" },
+    { "id": "b05", "source": "right", "destination": "q-right", "destinationKind": "queue", "routingKey": "order.created" },
+    { "id": "b06", "source": "right", "destination": "q-left", "destinationKind": "queue", "routingKey": "order.created" },
+    { "id": "b07", "source": "left", "destination": "cycle-a", "destinationKind": "exchange" },
+    { "id": "b08", "source": "cycle-a", "destination": "cycle-b", "destinationKind": "exchange" },
+    { "id": "b09", "source": "cycle-b", "destination": "left", "destinationKind": "exchange" },
+    { "id": "b00", "source": "cycle-b", "destination": "q-left", "destinationKind": "queue" },
+    { "id": "b10", "source": "shadow-dlx", "destination": "q-shadow", "destinationKind": "queue" },
+    { "id": "b11", "source": "dlx-entry", "destination": "q-dead", "destinationKind": "queue" },
+    { "id": "b12", "source": "chain-c", "destination": "q-chain", "destinationKind": "queue" }
+  ]
+}

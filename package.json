@@ -1,0 +1,22 @@
+{
+  "name": "message-router",
+  "version": "1.0.0",
+  "description": "Embeddable typed message router with direct, fanout and topic exchanges, exchange-to-exchange bindings and alternate-exchange fallback.",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "example": "node examples/check-topology.ts"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "license": "MIT"
+}
