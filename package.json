@@ -1,0 +1,19 @@
+{
+  "name": "response-coding",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Content-coding negotiation and streaming compression for an HTTP gateway response path",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec \"test/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "start": "node src/cli.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "typescript": "^5.9.0"
+  }
+}
