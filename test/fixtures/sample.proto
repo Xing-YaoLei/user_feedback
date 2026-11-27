@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rewrite.test;
+
+message Sample {
+  uint64 id = 1;
+  sint64 delta = 2;
+  fixed64 stamp = 3;
+  string name = 4;
+  bytes blob = 5;
+  fixed32 crc = 6;
+  repeated uint64 counters = 7;
+  repeated sint64 offsets = 8;
+  repeated fixed64 stamps = 9;
+  repeated fixed32 crcs = 10;
+}

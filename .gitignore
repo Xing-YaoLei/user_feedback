@@ -1,0 +1,5 @@
+node_modules/
+test/.artifacts/
+examples/.out/
+*.tmp-*
+.DS_Store
