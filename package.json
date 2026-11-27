@@ -1,0 +1,19 @@
+{
+  "name": "discovery-view-synthesis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multi-source service discovery view synthesis with generations, sequence numbers, TTLs, deletion markers and source conflicts.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts"
+  },
+  "scripts": {
+    "start": "node src/cli.ts",
+    "test": "node --test --test-concurrency=1 test/*.test.ts",
+    "typecheck": "node --experimental-strip-types --check src/index.ts"
+  }
+}
