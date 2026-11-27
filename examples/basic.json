@@ -1,0 +1,15 @@
+{
+  "sources": [
+    { "id": "us-east", "demand": "1200" },
+    { "id": "eu-west", "demand": "800" }
+  ],
+  "clusters": [
+    { "id": "us-cluster", "capacity": "1000" },
+    { "id": "eu-cluster", "capacity": "900" }
+  ],
+  "edges": [
+    { "source": "us-east", "cluster": "us-cluster", "cost": "0" },
+    { "source": "us-east", "cluster": "eu-cluster", "cost": "5" },
+    { "source": "eu-west", "cluster": "eu-cluster", "cost": "0" }
+  ]
+}

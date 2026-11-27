@@ -1,0 +1,17 @@
+{
+  "name": "mesh-traffic-planner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Exact max-throughput min-cost traffic planning over a multi-region service mesh",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "node src/cli.ts",
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}

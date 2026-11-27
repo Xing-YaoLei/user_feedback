@@ -1,0 +1,15 @@
+{
+  "sources": [
+    { "id": "region-us", "demand": "100" },
+    { "id": "region-eu", "demand": "100" }
+  ],
+  "clusters": [
+    { "id": "cluster-shared", "capacity": "100" },
+    { "id": "cluster-us-local", "capacity": "100" }
+  ],
+  "edges": [
+    { "source": "region-us", "cluster": "cluster-us-local", "cost": "0" },
+    { "source": "region-us", "cluster": "cluster-shared", "cost": "7" },
+    { "source": "region-eu", "cluster": "cluster-shared", "cost": "0" }
+  ]
+}
