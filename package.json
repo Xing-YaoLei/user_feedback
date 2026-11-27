@@ -1,0 +1,13 @@
+{
+  "name": "json-schema-2020-12-subset",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "JSON Schema 2020-12 子集请求校验模块（含 unevaluatedProperties 与分支求值注解合并）",
+  "scripts": {
+    "test": "node --test test/*.test.ts"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
