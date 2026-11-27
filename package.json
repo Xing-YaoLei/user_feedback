@@ -1,0 +1,11 @@
+{
+  "name": "partition-log-consumer-recovery",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Consumer position recovery across leader-epoch divergence, bound to a log token",
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "node examples/demo.ts"
+  }
+}
