@@ -1,0 +1,14 @@
+{
+  "name": "mesh-health-router",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "服务网格节点健康与选路模块（滑动窗口评分、连续失败隔离退避、受控探测恢复）",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "start": "node src/demo.ts"
+  }
+}
