@@ -1,0 +1,18 @@
+{
+  "name": "long-poll-reader",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Long-polling partition read module with revision-pinned snapshots and lossless change notification.",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./adapters/in-memory": "./src/adapters/in-memory.ts"
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=1 tests/*.test.ts",
+    "start": "node examples/demo.ts"
+  }
+}
