@@ -1,0 +1,20 @@
+{
+  "name": "multicast-reliability",
+  "version": "1.0.0",
+  "description": "NACK-based reliable multicast: single source, monotonic sequencing, repair window, merged NACKs, peer suppression, explicit resync on window loss.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "start": "node examples/run.ts",
+    "demo": "node examples/run.ts",
+    "test": "node --test test/*.test.ts",
+    "test:verbose": "node --test --test-reporter=spec test/*.test.ts"
+  },
+  "license": "MIT"
+}
