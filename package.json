@@ -1,0 +1,14 @@
+{
+  "name": "pro117-idempotent-rpc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Single-manager idempotent RPC entry point with durable local state, crash recovery, reconciliation and result reclamation.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec test/",
+    "start": "node src/main.ts"
+  }
+}
