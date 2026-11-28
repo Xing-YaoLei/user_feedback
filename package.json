@@ -1,0 +1,14 @@
+{
+  "name": "offset-lineage",
+  "version": "1.0.0",
+  "description": "Streaming offset lineage: sealed DAG records, terminal confirmations and safe source commit frontiers, persisted in a local directory",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "license": "MIT"
+}
