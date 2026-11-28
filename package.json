@@ -1,0 +1,13 @@
+{
+  "name": "swim-membership",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "SWIM-style membership protocol: direct/indirect probes, bounded suspicion, incarnation/seq refutation, gossip with caps and digest repair",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
